@@ -3,325 +3,410 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GREENDAY 2026 — Присоединяйтесь</title>
+<title>GREENDAY 2026 — Гринатом Информационная Безопасность</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --blue-dark: #003274;
+    --blue-mid: #025EA1;
+    --blue-light: #6CACE4;
+    --green: #BED33F;
+    --red: #8B0000;
+    --gray: #94A3B8;
+    --bg: #F1F5F9;
+    --white: #FFFFFF;
+    --text: #1E293B;
+    --muted: #64748B;
+    --border: #E2E8F0;
+  }
+
   html, body {
-    min-height: 100%;
     font-family: 'Inter', -apple-system, sans-serif;
-    background: #003274;
-    color: #FFFFFF;
+    background: var(--bg);
+    color: var(--text);
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
   }
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 16px;
+
+  /* ═══════════════ ВЕРХНЯЯ ЧАСТЬ (КАРТОЧКА) ═══════════════ */
+  .hero {
+    background: var(--blue-dark);
+    padding: 40px 20px 60px;
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
   }
-  body::before, body::after {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
+  .hero::before, .hero::after {
+    content: ''; position: absolute; border-radius: 50%; pointer-events: none;
   }
-  body::before {
-    width: 700px; height: 700px;
-    top: -350px; right: -350px;
-    background: #025EA1;
-    opacity: 0.4;
-  }
-  body::after {
-    width: 500px; height: 500px;
-    bottom: -250px; left: -250px;
-    background: #BED33F;
-    opacity: 0.12;
-  }
-  .container {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 480px;
-  }
+  .hero::before { width: 600px; height: 600px; top: -300px; right: -200px; background: var(--blue-mid); opacity: 0.4; }
+  .hero::after { width: 400px; height: 400px; bottom: -200px; left: -200px; background: var(--green); opacity: 0.15; }
+
+  .container { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .hero-header { margin-bottom: 30px; color: var(--white); }
+  .hero-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 3px; color: var(--green); margin-bottom: 8px; }
+  .hero-title { font-size: 32px; font-weight: 800; line-height: 1.1; margin-bottom: 12px; }
+  .hero-sub { font-size: 14px; color: var(--blue-light); }
+
   .card {
-    background: #FFFFFF;
+    background: var(--white);
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    max-width: 480px;
+    margin: 0 auto;
   }
-  .stripe-top {
-    height: 32px;
-    background: #BED33F;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 18px;
-  }
-  .stripe-top span {
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    color: #003274;
-  }
-  .header {
-    padding: 22px 24px 18px;
-    background: #003274;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 180px; height: 180px;
-    background: #025EA1;
-    opacity: 0.5;
-    border-radius: 50%;
-  }
-  .header::after {
-    content: '';
-    position: absolute;
-    top: 20px; right: 20px;
-    width: 100px; height: 100px;
-    background: #025EA1;
-    opacity: 0.4;
-    border-radius: 50%;
-  }
-  .header h1 {
-    position: relative;
-    z-index: 1;
-    color: #FFFFFF;
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.2px;
-  }
-  .header p {
-    position: relative;
-    z-index: 1;
-    color: #6CACE4;
-    font-size: 11px;
-    font-weight: 600;
-    margin-top: 8px;
-  }
+  .stripe-top { height: 32px; background: var(--green); display: flex; align-items: center; justify-content: space-between; padding: 0 18px; }
+  .stripe-top span { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; color: var(--blue-dark); }
+  
   .content { padding: 28px 24px; }
-  .lead {
-    color: #1E293B;
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
-    margin-bottom: 22px;
-    line-height: 1.45;
-  }
-  .channels {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
+  .lead { color: var(--text); font-size: 14px; font-weight: 500; text-align: center; margin-bottom: 22px; line-height: 1.45; }
+  
+  .channels { display: flex; flex-direction: column; gap: 14px; }
   .channel {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-    border-radius: 14px;
-    text-decoration: none;
-    color: #FFFFFF;
-    transition: transform 0.15s;
+    display: flex; align-items: center; gap: 14px; padding: 16px 18px;
+    border-radius: 14px; text-decoration: none; color: var(--white); transition: transform 0.15s;
   }
   .channel:active { transform: scale(0.98); }
   .channel-telegram { background: #229ED9; }
-  .channel-whatsapp { background: #25D366; }
+  .channel-atomspace { background: var(--blue-mid); }
+  
   .channel-icon {
-    width: 36px; height: 36px;
-    flex-shrink: 0;
-    background: rgba(255,255,255,0.2);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 36px; height: 36px; flex-shrink: 0; background: rgba(255,255,255,0.2);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
   }
-  .channel-icon svg {
-    width: 22px; height: 22px;
-    fill: #FFFFFF;
-  }
+  .channel-icon svg { width: 22px; height: 22px; }
   .channel-text { flex: 1; }
-  .channel-title {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
-  }
-  .channel-sub {
-    font-size: 11px;
-    opacity: 0.85;
-    margin-top: 2px;
-    font-weight: 500;
-  }
+  .channel-title { font-size: 15px; font-weight: 700; letter-spacing: 0.2px; }
+  .channel-sub { font-size: 11px; opacity: 0.85; margin-top: 2px; font-weight: 500; }
   .channel-arrow { font-size: 18px; opacity: 0.7; }
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 26px 0 18px;
-    color: #94A3B8;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #E2E8F0;
-  }
+
+  .divider { display: flex; align-items: center; gap: 12px; margin: 26px 0 18px; color: var(--gray); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
   .qr-block { display: flex; gap: 16px; }
-  .qr-item {
-    flex: 1;
+  .qr-item { flex: 1; text-align: center; padding: 14px 10px; border: 1.5px dashed var(--border); border-radius: 12px; background: #F8FAFC; }
+  .qr-item-label { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 8px; }
+  .qr-holder { display: flex; justify-content: center; align-items: center; min-height: 140px; }
+  .qr-holder img, .qr-holder canvas { display: block; max-width: 140px; height: auto !important; }
+
+  .footer-card { background: var(--blue-dark); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-card span { color: var(--blue-light); font-size: 10px; font-weight: 600; }
+  .footer-card strong { color: var(--white); }
+
+  /* ═══════════════ ПРОГРАММА ═══════════════ */
+  .program-section { padding: 60px 20px; max-width: 1400px; margin: 0 auto; }
+  
+  .program-header { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--border); padding-bottom: 16px; }
+  .program-title { font-size: 24px; font-weight: 800; color: var(--blue-dark); }
+  .program-time { font-size: 14px; font-weight: 700; color: var(--muted); }
+
+  .schedule-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 900px) { .schedule-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+
+  .schedule-col { display: flex; flex-direction: column; gap: 12px; }
+
+  .item {
+    display: flex; background: var(--white); border-radius: 12px; border: 1px solid var(--border);
+    overflow: hidden; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+
+  .item-time {
+    flex-shrink: 0; width: 100px; padding: 16px 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--white); text-align: center;
+  }
+  .item-time .time { font-size: 14px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+  .item-time .dur { font-size: 10px; font-weight: 600; opacity: 0.8; margin-top: 4px; }
+
+  .item-content { padding: 16px 20px; flex: 1; }
+  .item-tag { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .item-title { font-size: 15px; font-weight: 700; color: var(--blue-dark); line-height: 1.35; margin-bottom: 6px; }
+  .item-speaker { font-size: 12px; color: var(--muted); }
+  .item-qa { font-size: 11px; color: var(--gray); margin-top: 4px; }
+
+  .bg-green { background: var(--green); }
+  .text-green { color: #556313; }
+  .bg-blue { background: var(--blue-dark); }
+  .text-blue { color: var(--blue-mid); }
+  .bg-red { background: var(--red); }
+  .text-red { color: var(--red); }
+  .bg-gray { background: var(--gray); }
+  .text-gray { color: var(--muted); }
+
+  /* ═══════════════ БЛОК КОНТАКТОВ ═══════════════ */
+  .contact-section {
+    padding: 0 20px 80px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .contact-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 24px;
     text-align: center;
-    padding: 14px 10px;
-    border: 1.5px dashed #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  }
+  .contact-icon {
+    width: 64px; height: 64px;
+    background: var(--blue-dark);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .contact-icon svg { width: 28px; height: 28px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-title { font-size: 22px; font-weight: 800; color: var(--blue-dark); margin-bottom: 8px; }
+  .contact-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .btn-email {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--green);
+    color: var(--blue-dark);
+    font-size: 16px; font-weight: 800;
+    text-decoration: none;
+    padding: 16px 32px;
     border-radius: 12px;
-    background: #F8FAFC;
+    transition: transform 0.15s, background 0.15s;
   }
-  .qr-item-label {
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    color: #64748B;
-    margin-bottom: 8px;
-  }
-  .qr-holder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 140px;
-  }
-  .qr-holder img,
-  .qr-holder canvas {
+  .btn-email:hover { background: #aebf35; transform: translateY(-1px); }
+  .btn-email:active { transform: scale(0.98); }
+  .email-text {
     display: block;
-    max-width: 140px;
-    height: auto !important;
-  }
-  .footer {
-    background: #003274;
-    padding: 14px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer span {
-    color: #6CACE4;
-    font-size: 10px;
+    margin-top: 16px;
+    font-size: 13px;
     font-weight: 600;
+    color: var(--muted);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 4px;
   }
-  .footer strong { color: #FFFFFF; }
-  @media (min-width: 600px) {
-    body { padding: 40px 20px; }
-    .header h1 { font-size: 24px; }
-    .channel-title { font-size: 16px; }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 24px; }
+    .item { flex-direction: row; }
+    .item-time { width: 80px; padding: 12px 8px; }
+    .item-time .time { font-size: 12px; }
+    .item-content { padding: 12px 14px; }
+    .item-title { font-size: 14px; }
+    .program-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .contact-card { padding: 30px 20px; }
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="card">
-    <div class="stripe-top">
-      <span>GREENDAY 2026 · ТЕХНИЧЕСКИЙ ТРЕК</span>
-      <span>17.11.2026</span>
-    </div>
-
-    <div class="header">
-      <h1>ГРИНАТОМ<br>ИНФОРМАЦИОННАЯ БЕЗОПАСНОСТЬ</h1>
-      <p>Присоединяйтесь к чату конференции</p>
-    </div>
-
-    <div class="content">
-      <p class="lead">Выберите удобный мессенджер,<br>чтобы быть на связи с участниками</p>
-
-      <div class="channels">
-        <a href="#" class="channel channel-telegram" target="_blank" rel="noopener">
-          <div class="channel-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
-            </svg>
-          </div>
-          <div class="channel-text">
-            <div class="channel-title">Telegram-чат</div>
-            <div class="channel-sub">Основные обсуждения</div>
-          </div>
-          <div class="channel-arrow">→</div>
-        </a>
-
-        <a href="#" class="channel channel-whatsapp" target="_blank" rel="noopener">
-          <div class="channel-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.08 3.18 5.04 4.46.7.3 1.25.48 1.68.62.71.22 1.35.19 1.86.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.79h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.88-9.89 9.88zm8.41-18.29A11.82 11.82 0 0012.05 0C5.5 0 .17 5.33.17 11.88c0 2.09.55 4.13 1.59 5.93L.07 24l6.34-1.66a11.86 11.86 0 005.64 1.44h.01c6.54 0 11.88-5.33 11.88-11.88 0-3.17-1.24-6.15-3.48-8.39z"/>
-            </svg>
-          </div>
-          <div class="channel-text">
-            <div class="channel-title">WhatsApp-канал</div>
-            <div class="channel-sub">Новости и объявления</div>
-          </div>
-          <div class="channel-arrow">→</div>
-        </a>
+  <!-- ═══════════════ ВЕРХНЯЯ ЧАСТЬ ═══════════════ -->
+  <div class="hero">
+    <div class="container">
+      <div class="hero-header">
+        <div class="hero-eyebrow">GREENDAY 2026 • ТЕХНИЧЕСКИЙ ТРЕК</div>
+        <h1 class="hero-title">ГРИНАТОМ<br>ИНФОРМАЦИОННАЯ БЕЗОПАСНОСТЬ</h1>
+        <div class="hero-sub">17 ноября • г. Москва, БЦ Newton Plaza, 1-й Нагатинский проезд, 10с1</div>
       </div>
 
-      <div class="divider">ИЛИ СКАНИРУЙТЕ</div>
-
-      <div class="qr-block">
-        <div class="qr-item">
-          <div class="qr-item-label">TELEGRAM</div>
-          <div class="qr-holder" id="qr-tg"></div>
+      <div class="card">
+        <div class="stripe-top">
+          <span>GREENDAY 2026</span>
+          <span>17.11.2026</span>
         </div>
-        <div class="qr-item">
-          <div class="qr-item-label">WHATSAPP</div>
-          <div class="qr-holder" id="qr-wa"></div>
+
+        <div class="content">
+          <p class="lead">Присоединяйтесь к чату конференции,<br>чтобы быть на связи с участниками</p>
+
+          <div class="channels">
+            <!-- Telegram -->
+            <a href="#" class="channel channel-telegram" target="_blank" rel="noopener">
+              <div class="channel-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <div class="channel-text">
+                <div class="channel-title">Telegram-чат</div>
+                <div class="channel-sub">Основные обсуждения</div>
+              </div>
+              <div class="channel-arrow">→</div>
+            </a>
+
+            <!-- AtomSpace (Векторный логотип по скриншоту) -->
+            <a href="#" class="channel channel-atomspace" target="_blank" rel="noopener">
+              <div class="channel-icon">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="asGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#6CACE4"/>
+                      <stop offset="100%" stop-color="#025EA1"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- Центральный белый шестиугольник -->
+                  <path d="M 50 28 L 68 38 L 68 62 L 50 72 L 32 62 L 32 38 Z" fill="#FFFFFF"/>
+                  <!-- Три переплетающиеся орбиты -->
+                  <ellipse cx="50" cy="50" rx="36" ry="12" transform="rotate(30 50 50)" fill="none" stroke="url(#asGrad)" stroke-width="10" stroke-linecap="round"/>
+                  <ellipse cx="50" cy="50" rx="36" ry="12" transform="rotate(150 50 50)" fill="none" stroke="#6CACE4" stroke-width="10" stroke-linecap="round"/>
+                  <ellipse cx="50" cy="50" rx="36" ry="12" transform="rotate(270 50 50)" fill="none" stroke="#025EA1" stroke-width="10" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="channel-text">
+                <div class="channel-title">AtomSpace</div>
+                <div class="channel-sub">Корпоративный мессенджер</div>
+              </div>
+              <div class="channel-arrow">→</div>
+            </a>
+          </div>
+
+          <div class="divider">ИЛИ СКАНИРУЙТЕ</div>
+
+          <div class="qr-block">
+            <div class="qr-item">
+              <div class="qr-item-label">TELEGRAM</div>
+              <div class="qr-holder" id="qr-tg"></div>
+            </div>
+            <div class="qr-item">
+              <div class="qr-item-label">ATOMSPACE</div>
+              <div class="qr-holder" id="qr-as"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-card">
+          <span><strong>GREENDAY 2026</strong></span>
+          <span>17 ноября</span>
         </div>
       </div>
-    </div>
-
-    <div class="footer">
-      <span><strong>GREENDAY 2026</strong></span>
-      <span>17 ноября · БЦ Newton Plaza</span>
     </div>
   </div>
-</div>
 
-<script>
-  // ═══════════════════════════════════════════════════
-  //  ⚠️ ЗАМЕНИТЕ ССЫЛКИ НА ВАШИ РЕАЛЬНЫЕ КАНАЛЫ
-  // ═══════════════════════════════════════════════════
-  const TELEGRAM_URL = 'https://t.me/your_telegram_channel';
-  const WHATSAPP_URL = 'https://wa.me/your_whatsapp_link';
+  <!-- ═══════════════ ПРОГРАММА ═══════════════ -->
+  <div class="program-section">
+    <div class="program-header">
+      <div class="program-title">Программа мероприятия</div>
+      <div class="program-time">09:00 — 18:00</div>
+    </div>
 
-  document.querySelector('.channel-telegram').href = TELEGRAM_URL;
-  document.querySelector('.channel-whatsapp').href = WHATSAPP_URL;
+    <div class="schedule-grid">
+      <!-- ЛЕВАЯ КОЛОНКА -->
+      <div class="schedule-col">
+        <div class="item">
+          <div class="item-time bg-green text-white"><div class="time">09:00–10:00</div><div class="dur">60 мин</div></div>
+          <div class="item-content"><div class="item-tag text-green">ТЕХ. ЧАСТЬ</div><div class="item-title">Регистрация участников & Приветственный кофе</div><div class="item-speaker">Холл 15 этажа • Получение бейджей</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-green text-white"><div class="time">10:00–10:20</div><div class="dur">20 мин</div></div>
+          <div class="item-content"><div class="item-tag text-green">ТЕХ. ЧАСТЬ</div><div class="item-title">Официальное открытие & Вступительное слово</div><div class="item-speaker">Оргкомитет конференции</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-blue text-white"><div class="time">10:20–11:00</div><div class="dur">40 мин</div></div>
+          <div class="item-content"><div class="item-tag text-blue">ДОКЛАД 1</div><div class="item-title">Электронная почта, как основное средство коммуникации с контрагентами и одна из первых точек входа злоумышленников</div><div class="item-speaker">Спикер: Андрей Абрамов • Специалист</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-blue text-white"><div class="time">11:00–11:40</div><div class="dur">40 мин</div></div>
+          <div class="item-content"><div class="item-tag text-blue">ДОКЛАД 2</div><div class="item-title">Пароли глазами атакующего</div><div class="item-speaker">Спикер: Алексей Бабошкин • Младший специалист</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-green text-white"><div class="time">11:40–12:10</div><div class="dur">30 мин</div></div>
+          <div class="item-content"><div class="item-tag text-green">КОФЕ-БРЕЙК</div><div class="item-title">Кофе-пауза и нетворкинг</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-blue text-white"><div class="time">12:10–12:50</div><div class="dur">40 мин</div></div>
+          <div class="item-content"><div class="item-tag text-blue">ДОКЛАД 3</div><div class="item-title">Poisoning- и Relay-атаки в рамках Active Directory</div><div class="item-speaker">Спикер: Иван Беляев • Старший специалист</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-blue text-white"><div class="time">12:50–13:30</div><div class="dur">40 мин</div></div>
+          <div class="item-content"><div class="item-tag text-blue">ДОКЛАД 4</div><div class="item-title">Защита ИТ-инфраструктуры с помощью PAM</div><div class="item-speaker">Спикер: Артем Строилов • Руководитель направления & Влад Пистер • Специалист</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-gray text-white"><div class="time">13:30–14:10</div><div class="dur">40 мин</div></div>
+          <div class="item-content"><div class="item-tag text-gray">ОБЕД</div><div class="item-title">Обеденный перерыв</div></div>
+        </div>
+      </div>
 
-  function makeQR(containerId, url) {
-    new QRCode(document.getElementById(containerId), {
-      text: url,
-      width: 140,
-      height: 140,
-      colorDark: '#003274',
-      colorLight: '#FFFFFF',
-      correctLevel: QRCode.CorrectLevel.H
-    });
-  }
+      <!-- ПРАВАЯ КОЛОНКА -->
+      <div class="schedule-col">
+        <div class="item">
+          <div class="item-time bg-red text-white"><div class="time">14:10–15:10</div><div class="dur">60 мин</div></div>
+          <div class="item-content"><div class="item-tag text-red">МАСТЕР-КЛАСС</div><div class="item-title">Захват инфраструктуры на базе MS Active Directory</div><div class="item-speaker">Спикер: Евгений Деревцов • Ведущий специалист</div><div class="item-qa">Сессия Q&A (10 мин)</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-blue text-white"><div class="time">15:10–15:50</div><div class="dur">40 мин</div></div>
+          <div class="item-content"><div class="item-tag text-blue">ДОКЛАД 5</div><div class="item-title">Работа с MaxPatrol SIEM: разница между сбором логов и управляемым процессом обнаружения угроз</div><div class="item-speaker">Спикер: Артем Брагин • Старший специалист</div><div class="item-qa">Сессия Q&A (10 мин)</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-blue text-white"><div class="time">15:50–16:30</div><div class="dur">40 мин</div></div>
+          <div class="item-content"><div class="item-tag text-blue">ДОКЛАД 6</div><div class="item-title">СУБД или системы управления бесконтрольным доступом. Как интеграторы и ИТ-отделы отдают инфраструктуры без боя.</div><div class="item-speaker">Спикер: Павел Ермолинский • Ведущий специалист</div><div class="item-qa">Сессия Q&A (10 мин)</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-blue text-white"><div class="time">16:30–17:10</div><div class="dur">40 мин</div></div>
+          <div class="item-content"><div class="item-tag text-blue">ДОКЛАД 7</div><div class="item-title">ПО Сетевой инспектор: автоматизация проверки сетевых взаимодействий</div><div class="item-speaker">Спикер: Анастасия Иоффе • Старший специалист</div><div class="item-qa">Сессия Q&A (10 мин)</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-blue text-white"><div class="time">17:10–17:50</div><div class="dur">40 мин</div></div>
+          <div class="item-content"><div class="item-tag text-blue">ДОКЛАД 8</div><div class="item-title">Реверс протокола 1С "Предприятие"</div><div class="item-speaker">Спикер: Давид Иорин • Старший специалист</div><div class="item-qa">Сессия Q&A (10 мин)</div></div>
+        </div>
+        <div class="item">
+          <div class="item-time bg-green text-white"><div class="time">17:50–18:00</div><div class="dur">10 мин</div></div>
+          <div class="item-content"><div class="item-tag text-green">ТЕХ. ЧАСТЬ</div><div class="item-title">Подведение итогов & Закрытие</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  window.addEventListener('load', function () {
-    if (typeof QRCode !== 'undefined') {
-      makeQR('qr-tg', TELEGRAM_URL);
-      makeQR('qr-wa', WHATSAPP_URL);
+  <!-- ═══════════════ БЛОК КОНТАКТОВ ═══════════════ -->
+  <section class="contact-section">
+    <div class="contact-card">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </div>
+      <h2 class="contact-title">Остались вопросы?</h2>
+      <p class="contact-sub">Напишите нам, если нужна помощь с регистрацией или организацией</p>
+      
+      <a href="#" id="btn-email" class="btn-email">Написать нам</a>
+      <a href="#" id="link-email" class="email-text">org@greenday.ru</a>
+    </div>
+  </section>
+
+  <script>
+    // ═══════════════════════════════════════════════════
+    //  ⚠️ ЗАМЕНИТЕ ССЫЛКИ И ПОЧТУ ЗДЕСЬ
+    // ═══════════════════════════════════════════════════
+    const TELEGRAM_URL = 'https://t.me/your_telegram_channel';
+    const ATOMSPACE_URL = 'https://atomspace.rosatom.ru/your_link';
+    const CONTACT_EMAIL = 'org@greenday.ru'; // <-- Ваша почта для связи
+
+    // Обновляем ссылки на кнопках
+    document.querySelector('.channel-telegram').href = TELEGRAM_URL;
+    document.querySelector('.channel-atomspace').href = ATOMSPACE_URL;
+
+    // Обновляем ссылки на почту
+    document.getElementById('btn-email').href = `mailto:${CONTACT_EMAIL}`;
+    document.getElementById('link-email').href = `mailto:${CONTACT_EMAIL}`;
+    document.getElementById('link-email').textContent = CONTACT_EMAIL;
+
+    // Генерация QR-кодов
+    function makeQR(containerId, url) {
+      new QRCode(document.getElementById(containerId), {
+        text: url,
+        width: 140,
+        height: 140,
+        colorDark: '#003274',
+        colorLight: '#FFFFFF',
+        correctLevel: QRCode.CorrectLevel.H
+      });
     }
-  });
-</script>
+
+    // Инициализация после загрузки
+    window.addEventListener('load', function () {
+      if (typeof QRCode !== 'undefined') {
+        makeQR('qr-tg', TELEGRAM_URL);
+        makeQR('qr-as', ATOMSPACE_URL);
+      }
+    });
+  </script>
 
 </body>
 </html>
